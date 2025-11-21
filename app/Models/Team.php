@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'location', 'description'];
+
+    public function players()
+    {
+        return $this->hasMany(Player::class);
+    }
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }
