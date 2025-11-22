@@ -3,6 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Player;
+use App\Models\Position;
+use App\Models\Post;
+use App\Models\Role;
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +20,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        Position::create(['label' => 'PG']);
+        Position::create(['label' => 'SG']);
+        Position::create(['label' => 'SF']);
+        Position::create(['label' => 'PF']);
+        Position::create(['label' => 'C']);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $admin = Role::create(['label' => 'admin']);
+        $writer = Role::create(['label' => 'writer']);
+        $reader = Role::create(['label' => 'reader']);
+
+        $adminUser = User::factory()->create([
+            'name' => 'Admin',
+            'firstname' => 'User',
+            'role_id' => $admin->id
+        ]);
+
+        $writerUser = User::factory()->create([
+            'name' => 'Writer',
+            'firstname' => 'User',
+            'role_id' => $writer->id
+        ]);
+
+        User::factory()->create([
+            'name' => 'Reader',
+            'firstname' => 'User',
+            'role_id' => $reader->id
+        ]);
+
+        Category::factory(5)->create();
+
+        $teams = Team::factory(10)->create();
+        foreach ($teams as $team) {
+            Player::factory(2)->create([
+                'team_id' => $team->id,
+                'position_id' => random_int(1, 5)
+            ]);
+        }
+
+        Post::factory(5)->create([
+            'user_id' => $adminUser->id
+        ]);
+
+        Post::factory(5)->create([
+            'user_id' => $writerUser->id
+        ]);
+
     }
 }
