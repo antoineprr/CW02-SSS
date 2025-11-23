@@ -19,7 +19,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory()->create(),
+            'user_id' => User::factory(),
             'title' => fake()->sentence(),
             'body' => fake()->paragraphs(3, true),
             'published_at' => fake()->dateTime(),

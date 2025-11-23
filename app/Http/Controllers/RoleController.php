@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+    public static function getReaderId()
+    {
+        try {
+            return Role::where('label', 'reader')->firstOrFail()->id;
+        } catch (ModelNotFoundException) {
+            throw new \Exception("Role 'reader' not found in the database.");
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
