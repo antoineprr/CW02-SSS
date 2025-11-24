@@ -34,21 +34,24 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'firstname' => 'User',
             'email' => 'admin@example.com',
-            'role_id' => $admin->id
+            'role_id' => $admin->id,
+            'password' => bcrypt('admin')
         ]);
 
         $writerUser = User::factory()->create([
             'name' => 'Writer',
             'firstname' => 'User',
             'email' => 'writer@example.com',
-            'role_id' => $writer->id
+            'role_id' => $writer->id,
+            'password' => bcrypt('writer')
         ]);
 
         User::factory()->create([
             'name' => 'Reader',
             'firstname' => 'User',
             'email' => 'reader@example.com',
-            'role_id' => $reader->id
+            'role_id' => $reader->id,
+            'password' => bcrypt('reader')
         ]);
 
         Category::factory(5)->create();
