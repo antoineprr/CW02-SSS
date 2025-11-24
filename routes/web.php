@@ -15,12 +15,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard'); // ->middleware(['auth', 'verified'])
+Route::get('/home', function () {
+    return redirect('/');
+});
+
+Route::get('/players', function () {
+    return view('players');
+})->name('players');
+
+Route::get('/teams', function () {
+    return view('teams');
+})->name('teams');
+
+Route::get('/search', function () {
+    return view('search');
+})->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
