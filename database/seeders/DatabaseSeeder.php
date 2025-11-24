@@ -33,18 +33,21 @@ class DatabaseSeeder extends Seeder
         $adminUser = User::factory()->create([
             'name' => 'Admin',
             'firstname' => 'User',
+            'email' => 'admin@example.com',
             'role_id' => $admin->id
         ]);
 
         $writerUser = User::factory()->create([
             'name' => 'Writer',
             'firstname' => 'User',
+            'email' => 'writer@example.com',
             'role_id' => $writer->id
         ]);
 
         User::factory()->create([
             'name' => 'Reader',
             'firstname' => 'User',
+            'email' => 'reader@example.com',
             'role_id' => $reader->id
         ]);
 

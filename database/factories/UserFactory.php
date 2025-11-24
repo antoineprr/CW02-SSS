@@ -28,7 +28,6 @@ class UserFactory extends Factory
             'role_id' => Role::factory(),
             'name' => fake()->lastName(),
             'firstname' => fake()->firstName(),
-            'surname' => fake()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
