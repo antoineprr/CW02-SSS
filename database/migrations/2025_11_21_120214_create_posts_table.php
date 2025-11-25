@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('title');
             $table->text('body');
-            $table->timestamp('published_at')->nullable();
             // TODO : add a thumbnail
             $table->timestamps();
         });

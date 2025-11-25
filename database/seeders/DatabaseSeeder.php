@@ -33,19 +33,25 @@ class DatabaseSeeder extends Seeder
         $adminUser = User::factory()->create([
             'name' => 'Admin',
             'firstname' => 'User',
-            'role_id' => $admin->id
+            'email' => 'admin@example.com',
+            'role_id' => $admin->id,
+            'password' => bcrypt('admin')
         ]);
 
         $writerUser = User::factory()->create([
             'name' => 'Writer',
             'firstname' => 'User',
-            'role_id' => $writer->id
+            'email' => 'writer@example.com',
+            'role_id' => $writer->id,
+            'password' => bcrypt('writer')
         ]);
 
         User::factory()->create([
             'name' => 'Reader',
             'firstname' => 'User',
-            'role_id' => $reader->id
+            'email' => 'reader@example.com',
+            'role_id' => $reader->id,
+            'password' => bcrypt('reader')
         ]);
 
         Category::factory(5)->create();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +16,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        'posts' => Post::latest()->limit(5)->get()
+    ]);
+})->name('home');
+
+Route::get('/home', function () {
+    return redirect('/');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/players', function () {
+    return view('players');
+})->name('players');
+
+Route::get('/teams', function () {
+    return view('teams');
+})->name('teams');
+
+Route::get('/search', function () {
+    return view('search');
+})->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -18,7 +18,7 @@ class CountryFactory extends Factory
     {
         return [
             'name' => fake()->country(),
-            'surname' => fake()->countryCode(), 
+            'code' => fake()->countryCode(), 
         ];
     }
 }
