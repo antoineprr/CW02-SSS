@@ -53,6 +53,24 @@ class ProfileController extends Controller
     }
 
     /**
+     * Delete the user's profile picture.
+     */
+    public function deletePicture(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        
+        if ($user->picture && Storage::disk('public')->exists($user->picture)) {
+            Storage::disk('public')->delete($user->picture);
+            $user->picture = null;
+            $user->save();
+            
+            return Redirect::route('profile.edit')->with('success', 'Profile picture deleted successfully.');
+        }
+        
+        return Redirect::route('profile.edit')->with('error', 'No profile picture to delete.');
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

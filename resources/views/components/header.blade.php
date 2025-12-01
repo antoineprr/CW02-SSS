@@ -36,6 +36,15 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
+                    <div class="ml-2">
+                        @if (Auth::user()->picture && Storage::disk('public')->exists(Auth::user()->picture))
+                            <img 
+                                src="{{ asset('storage/' . Auth::user()->picture) }}" 
+                                alt="Current photo" 
+                                class="h-10 w-10 rounded-full object-cover"
+                            >
+                        @endif
+                    </div>
                 </div>
 
                 

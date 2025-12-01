@@ -85,6 +85,42 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>Save</x-primary-button>
+
+             @if ($user->picture && Storage::disk('public')->exists($user->picture))
+                <x-danger-button
+                    x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-picture-deletion')"
+                >Delete current picture</x-danger-button>
+            @endif
         </div>
     </form>
+
+    @if ($user->picture && Storage::disk('public')->exists($user->picture))
+        <x-modal name="confirm-picture-deletion" focusable>
+            <form method="post" action="{{ route('profile.picture.delete') }}" class="p-6">
+                @csrf
+                @method('delete')
+
+                <h2 class="text-lg font-medium text-gray-900">
+                    Are you sure you want to delete your profile picture?
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    Once your profile picture is deleted, it will be permanently removed.
+                </p>
+
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        Cancel
+                    </x-secondary-button>
+
+                    <x-danger-button class="ms-3">
+                        Delete Picture
+                    </x-danger-button>
+                </div>
+            </form>
+        </x-modal>
+    @endif
+
+        
 </section>
