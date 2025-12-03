@@ -81,8 +81,6 @@
             </div>
         </div>
 
-
-
         <div class="flex items-center gap-4">
             <x-primary-button>Save</x-primary-button>
 

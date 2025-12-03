@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,18 @@ Route::get('/teams', function () {
 Route::get('/search', function () {
     return view('search');
 })->name('search');
+
+Route::get('/create-post', function () {
+    return view('create-post');
+})->name('post.create');
+
+Route::post('/create-post', [PostController::class, 'store'])->name('post.store')->middleware('auth');
+
+Route::get('/posts/{post:slug}', function (Post $post) {
+    return view('post', [
+        'post' => $post
+    ]);
+})->name('post.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
