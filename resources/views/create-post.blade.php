@@ -24,6 +24,12 @@
                     </div>
 
                     <div>
+                        <x-input-label for="slug" value="Slug" />
+                        <x-text-input id="slug" name="slug" type="text" class="mt-1 block w-full" :value="old('slug')" required />
+                        <x-input-error class="mt-2" :messages="$errors->get('slug')" />
+                    </div>
+
+                    <div>
                         <x-input-label for="body" value="Body" />
                         <textarea id="body" name="body" rows="6" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>{{ old('body') }}</textarea>
                         <x-input-error class="mt-2" :messages="$errors->get('body')" />
@@ -48,4 +54,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('title').addEventListener('input', function() {
+            const title = this.value;
+            const slug = title
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-') 
+                .replace(/^-|-$/g, '');
+            
+            document.getElementById('slug').value = slug;
+        });
+    </script>
 </x-app-layout>

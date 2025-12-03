@@ -11,41 +11,17 @@ class Post extends Model
     use HasFactory;
     protected $fillable = ['title', 'slug', 'body', 'thumbnail', 'user_id'];
 
-    // Génération automatique du slug à partir du titre
-    public function setTitleAttribute($value)
+    public function getArticleInfos()
     {
-        $this->attributes['title'] = $value;
-        $this->attributes['slug'] = Str::slug($value);
-    }
-
-    // S'assurer que le slug est unique
-    public static function boot()
-    {
-        parent::boot();
-        
-        static::creating(function ($post) {
-            $post->slug = $post->generateUniqueSlug($post->title);
-        });
-        
-        static::updating(function ($post) {
-            if ($post->isDirty('title')) {
-                $post->slug = $post->generateUniqueSlug($post->title);
-            }
-        });
-    }
-    
-    private function generateUniqueSlug($title)
-    {
-        $slug = Str::slug($title);
-        $originalSlug = $slug;
-        $counter = 1;
-        
-        while (static::where('slug', $slug)->where('id', '!=', $this->id)->exists()) {
-            $slug = $originalSlug . '-' . $counter;
-            $counter++;
+        if ($this->author) {
+            $authorName = $this->author->firstname . ' ' . $this->author->name;
+            $authorLink = '<a href="TODO" class="text-blue-600 hover:text-blue-800 underline">' . $authorName . '</a>';
+            $createdAt = $this->created_at ? $this->created_at->format('F j, Y') : 'Unknown Date';
+            return "By {$authorLink} on {$createdAt}";
         }
         
-        return $slug;
+        $createdAt = $this->created_at ? $this->created_at->format('F j, Y') : 'Unknown Date';
+        return "By Unknown Author on {$createdAt}";
     }
 
     public function excerpt($length = 150)

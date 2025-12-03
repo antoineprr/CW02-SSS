@@ -1,7 +1,7 @@
 @props(['post'])
 
 <div class="h-full">
-    <div class="bg-white overflow-hidden shadow-sm h-full flex flex-col justify-center">
+    <a href="{{ route('post.show', $post->slug) }}" class="bg-white overflow-hidden shadow-sm h-full flex flex-col justify-center hover:shadow-lg transition-shadow duration-200">
         <div class="grid grid-cols-4 items-center">
             <div class="col-span-1 p-2 flex justify-center">
                 @if($post->thumbnail)
@@ -21,5 +21,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </a>
 </div>

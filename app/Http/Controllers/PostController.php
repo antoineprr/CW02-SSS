@@ -14,6 +14,7 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'required|string|unique:posts,slug|max:255',
             'body' => 'required|string',
             'thumbnail' => 'nullable|image|max:2048',
         ]);
