@@ -51,32 +51,33 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('reader')
         ]);
 
-        $categories = Category::factory(10)->create();
+        if (app()->environment() !== 'production') {
+            $categories = Category::factory(10)->create();
 
-        $teams = Team::factory(10)->create();
-        foreach ($teams as $team) {
-            Player::factory(2)->create([
-                'team_id' => $team->id,
-                'position_id' => random_int(1, 5)
+            $teams = Team::factory(10)->create();
+            foreach ($teams as $team) {
+                Player::factory(2)->create([
+                    'team_id' => $team->id,
+                    'position_id' => random_int(1, 5)
+                ]);
+            }
+
+            $adminPost = Post::factory(5)->create([
+                'user_id' => $adminUser->id
             ]);
+
+            $writerPost = Post::factory(5)->create([
+                'user_id' => $writerUser->id
+            ]);
+
+            $players = Player::all();
+            $posts = $adminPost->concat($writerPost);
+
+            foreach ($posts as $index => $post) {
+                $post->categories()->attach($categories[$index]->id);
+                $post->teams()->attach($teams[$index]->id);
+                $post->players()->attach($players[$index]->id);
+            }
         }
-
-        $adminPost = Post::factory(5)->create([
-            'user_id' => $adminUser->id
-        ]);
-
-        $writerPost = Post::factory(5)->create([
-            'user_id' => $writerUser->id
-        ]);
-
-        $players = Player::all();
-        $posts = $adminPost->concat($writerPost);
-
-        foreach ($posts as $index => $post) {
-            $post->categories()->attach($categories[$index]->id);
-            $post->teams()->attach($teams[$index]->id);
-            $post->players()->attach($players[$index]->id);
-        }
-
     }
 }
