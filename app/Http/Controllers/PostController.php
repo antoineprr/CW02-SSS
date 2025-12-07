@@ -32,6 +32,15 @@ class PostController extends Controller
         ]);
     }
 
+    public function getAllArticles() 
+    {
+        return view('articles', [
+            'type' => 'all',
+            'categoryLabel' => 'All Articles',
+            'posts' => Post::with(['categories', 'author', 'players', 'teams'])->latest()->get()
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

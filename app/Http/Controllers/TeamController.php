@@ -15,7 +15,7 @@ class TeamController extends Controller
         return view('team', ['team' => $team->load('players')]);
     }
 
-    public function getTeamByArticles(Team $team) {
+    public function getTeamArticles(Team $team) {
         return view('category', [
             'type' => 'team',
             'categoryLabel' => $team,
