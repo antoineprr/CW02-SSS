@@ -3,6 +3,8 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
+use App\Models\Player;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +53,20 @@ Route::get('/posts/{post:slug}', function (Post $post) {
     ]);
 })->name('post.show');
 
+// Route::get('/authors/{firstname}-{name}', function ($firstname, $name) {
+//     $author = User::where('firstname', $firstname)
+//                                 ->where('name', $name)
+//                                 ->firstOrFail();
+//     return view('category', [
+//         'type' => 'author',
+//         'categoryLabel' => $author,
+//         'posts' => $author->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
+//     ]);
+// })->name('player.show');
+
 Route::get('/category/{category:label}', function ($category) {
     return view('category', [
+        'type' => 'category',
         'categoryLabel' => $category,
         'posts' => Post::whereHas('categories', function ($query) use ($category) {
             $query->where('label', $category);
@@ -60,21 +74,22 @@ Route::get('/category/{category:label}', function ($category) {
     ]);
 })->name('category.show');
 
-Route::get('/teams/{team:name}', function ($team) {
+Route::get('/teams/{team:name}', function (Team $team) {
     return view('category', [
+        'type' => 'team',
         'categoryLabel' => $team,
-        'posts' => Post::whereHas('teams', function ($query) use ($team) {
-            $query->where('name', $team);
-        })->with(['categories', 'author', 'players', 'teams'])->latest()->get()
+        'posts' => $team->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
     ]);
 })->name('team.show');
 
 Route::get('/players/{firstname}-{name}', function ($firstname, $name) {
+    $player = Player::where('firstname', $firstname)
+                                ->where('name', $name)
+                                ->firstOrFail();
     return view('category', [
-        'categoryLabel' => $firstname . ' ' . $name,
-        'posts' => Post::whereHas('players', function ($query) use ($firstname, $name) {
-            $query->where('firstname', $firstname)->where('name', $name);
-        })->with(['categories', 'author', 'players', 'teams'])->latest()->get()
+        'type' => 'player',
+        'categoryLabel' => $player,
+        'posts' => $player->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
     ]);
 })->name('player.show');
 
