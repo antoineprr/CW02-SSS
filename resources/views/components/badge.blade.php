@@ -10,8 +10,8 @@
     ];
     
     $sizeClasses = $size === 'large' 
-        ? 'text-base px-3 py-2 rounded-lg mr-2 font-medium' 
-        : 'text-xs px-2 py-1 rounded-md mr-1 font-medium';
+        ? 'text-base px-3 py-2 rounded-lg mr-1 font-medium' 
+        : 'text-xs px-2 py-1 rounded-md mr-0.5 font-medium';
 @endphp
 
 @if($color)

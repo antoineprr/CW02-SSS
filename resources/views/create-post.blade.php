@@ -47,6 +47,48 @@
                         <x-input-error class="mt-2" :messages="$errors->get('thumbnail')" />
                     </div>
 
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-1">
+                            <x-input-label for="categories" value="Categories" />
+                            <select id="categories" name="categories[]" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" size="5">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" 
+                                            {{ in_array($category->id, old('categories', [])) ? 'selected' : '' }}>
+                                        {{ $category->label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <p class="mt-1 text-sm text-gray-600">Hold Ctrl (or Cmd on Mac) to select multiple categories</p>
+                            <x-input-error class="mt-2" :messages="$errors->get('categories')" />
+                        </div>
+                        <div class="col-span-1">
+                            <x-input-label for="teams" value="Teams" />
+                            <select id="teams" name="teams[]" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" size="5">
+                                @foreach($teams as $team)
+                                    <option value="{{ $team->id }}" 
+                                            {{ in_array($team->id, old('teams', [])) ? 'selected' : '' }}>
+                                        {{ $team->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <p class="mt-1 text-sm text-gray-600">Hold Ctrl (or Cmd on Mac) to select multiple teams</p>
+                            <x-input-error class="mt-2" :messages="$errors->get('teams')" />
+                        </div>
+                        <div class="col-span-1">
+                            <x-input-label for="players" value="Players" />
+                            <select id="players" name="players[]" multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" size="5">
+                                @foreach($players as $player)
+                                    <option value="{{ $player->id }}" 
+                                            {{ in_array($player->id, old('players', [])) ? 'selected' : '' }}>
+                                        {{ $player->firstname }} {{ $player->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <p class="mt-1 text-sm text-gray-600">Hold Ctrl (or Cmd on Mac) to select multiple players</p>
+                            <x-input-error class="mt-2" :messages="$errors->get('players')" />
+                        </div>
+                    </div>
+
                     <div class="flex items-center gap-4 justify-end">
                         <x-primary-button>Create Post</x-primary-button>
                     </div>

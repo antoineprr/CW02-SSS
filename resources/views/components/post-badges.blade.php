@@ -1,7 +1,7 @@
 @props(['post', 'size' => 'small'])
 
 @if($post->categories->count() > 0 || $post->teams->count() > 0 || $post->players->count() > 0)
-    <div class="mb-2 {{ $size === 'large' ? 'flex flex-wrap' : 'flex flex-wrap gap-1' }}">
+    <div class="mb-2 {{ $size === 'large' ? 'flex flex-wrap gap-1' : 'flex flex-wrap gap-1' }}">
         @foreach($post->categories as $category)
             <x-badge :href="route('category.show', $category->label)" type="category" :size="$size">
                 {{ $category->label }}
