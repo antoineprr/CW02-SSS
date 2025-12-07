@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('age');
             $table->integer('number')->min(0)->max(99);
             $table->string('description');
-            // TODO : add picture
             $table->timestamps();
         });
     }
