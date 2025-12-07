@@ -48,9 +48,9 @@ Route::get('/create-post', function () {
         'players' => Player::all(),
         'teams' => Team::all(),
     ]);
-})->name('post.create');
+})->name('post.create')->middleware('author');
 
-Route::post('/create-post', [PostController::class, 'store'])->name('post.store')->middleware('auth');
+Route::post('/create-post', [PostController::class, 'store'])->name('post.store')->middleware('author');
 
 Route::get('/posts/{post:slug}', function (Post $post) {
     return view('post', [
