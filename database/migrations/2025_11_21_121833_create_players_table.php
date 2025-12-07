@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('firstname');
             $table->integer('age');
+            $table->integer('number')->min(0)->max(99);
             $table->string('description');
             // TODO : add picture
             $table->timestamps();

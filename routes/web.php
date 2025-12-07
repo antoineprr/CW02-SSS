@@ -31,12 +31,24 @@ Route::get('/home', function () {
 });
 
 Route::get('/players', function () {
-    return view('players');
+    return view('players', ['players' => Player::with(['team'])->get()->sortBy('name')]);
 })->name('players');
 
+Route::get('/players/{firstname}-{name}', function ($firstname, $name) {
+    $player = Player::where('firstname', $firstname)
+                                ->where('name', $name)
+                                ->firstOrFail()
+                                ->load('team', 'position', 'country');
+    return view('player', ['player' => $player]);
+})->name('player.show');
+
 Route::get('/teams', function () {
-    return view('teams');
+    return view('teams', ['teams' => Team::all()->sortBy('name')]);
 })->name('teams');
+
+Route::get('/teams/{team:name}', function (Team $team) {
+    return view('team', ['team' => $team->load('players')]);
+})->name('team.show');
 
 Route::get('/search', function () {
     return view('search');
@@ -58,7 +70,7 @@ Route::get('/posts/{post:slug}', function (Post $post) {
     ]);
 })->name('post.show');
 
-Route::get('/authors/{firstname}-{lastname}', function ($firstname, $lastname) {
+Route::get('/articles/authors/{firstname}-{lastname}', function ($firstname, $lastname) {
     $author = User::where('firstname', $firstname)
                                 ->where('name', $lastname)
                                 ->where('is_author', true)
@@ -68,10 +80,9 @@ Route::get('/authors/{firstname}-{lastname}', function ($firstname, $lastname) {
         'categoryLabel' => $author,
         'posts' => $author->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
     ]);
-})->name('author.show');
+})->name('articles.author');
 
-
-Route::get('/category/{category:label}', function ($category) {
+Route::get('/articles/category/{category:label}', function ($category) {
     return view('category', [
         'type' => 'category',
         'categoryLabel' => $category,
@@ -79,17 +90,17 @@ Route::get('/category/{category:label}', function ($category) {
             $query->where('label', $category);
         })->with(['categories', 'author', 'players', 'teams'])->latest()->get()
     ]);
-})->name('category.show');
+})->name('articles.category');
 
-Route::get('/teams/{team:name}', function (Team $team) {
+Route::get('/articles/teams/{team:name}', function (Team $team) {
     return view('category', [
         'type' => 'team',
         'categoryLabel' => $team,
         'posts' => $team->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
     ]);
-})->name('team.show');
+})->name('articles.team');
 
-Route::get('/players/{firstname}-{name}', function ($firstname, $name) {
+Route::get('/articles/players/{firstname}-{name}', function ($firstname, $name) {
     $player = Player::where('firstname', $firstname)
                                 ->where('name', $name)
                                 ->firstOrFail();
@@ -98,7 +109,7 @@ Route::get('/players/{firstname}-{name}', function ($firstname, $name) {
         'categoryLabel' => $player,
         'posts' => $player->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
     ]);
-})->name('player.show');
+})->name('articles.player');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

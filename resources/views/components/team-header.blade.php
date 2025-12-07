@@ -16,7 +16,9 @@
         @endif
         
         <div class="flex-1">
-            <h1 class="text-3xl font-bold mb-2">{{ $team->name }}</h1>
+            <h1 class="text-3xl font-bold mb-2">
+                <a href="{{ route('team.show', $team) }}" class="hover:underline">{{ $team->name }}</a>
+            </h1>
             <p class="text-lg opacity-90 mb-1">{{ $team->location }}</p>
             <p class="opacity-80">{{ $team->description }}</p>
         </div>

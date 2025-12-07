@@ -9,7 +9,7 @@
     
     @if(count($posts) > 1)
         <div>
-            <div class="grid grid-cols-1 gap-2 h-full">
+            <div class="grid grid-cols-1 gap-2">
                 @foreach($posts->slice(1, 4) as $post)
                     <x-article-overview :post="$post"/>
                 @endforeach

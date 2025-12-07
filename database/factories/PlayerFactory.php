@@ -26,6 +26,7 @@ class PlayerFactory extends Factory
             'name' => fake()->lastName(),
             'firstname' => fake()->firstName(),
             'age' => fake()->numberBetween(18, 40),
+            'number' => fake()->numberBetween(0, 99),
             'description' => fake()->sentence(12),
         ];
     }

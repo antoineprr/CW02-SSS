@@ -36,7 +36,7 @@
     @if($posts->count() > 0)
         <x-posts-grid :posts="$posts" />
     @else
-        <div class="py-12 px-12 mx-auto text-center">
+        <div class="py-10 px-10 mx-auto text-center bg-white shadow-sm rounded-lg max-w-2xl mt-4">
             <h3 class="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
             @if($type === 'category')
                 <p class="text-gray-600">There are no posts in the "{{ $categoryLabel }}" category yet.</p>

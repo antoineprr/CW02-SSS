@@ -15,7 +15,7 @@ class Post extends Model
     {
         if ($this->author) {
             $authorName = $this->author->firstname . ' ' . $this->author->name;
-            $authorLink = '<a href="' . route('author.show', ['firstname' => $this->author->firstname, 'lastname' => $this->author->name]) . '" class="text-blue-600 hover:text-blue-800 underline">' . $authorName . '</a>';
+            $authorLink = '<a href="' . route('articles.author', ['firstname' => $this->author->firstname, 'lastname' => $this->author->name]) . '" class="text-blue-600 hover:text-blue-800 underline">' . $authorName . '</a>';
             $createdAt = $this->created_at ? $this->created_at->format('F j, Y') : 'Unknown Date';
             return "By {$authorLink} on {$createdAt}";
         }
