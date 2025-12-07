@@ -22,7 +22,8 @@ class User extends Authenticatable
         'firstname',
         'email',
         'password',
-        'role_id',
+        'is_admin',
+        'is_author',
         'picture'
     ];
 
@@ -45,11 +46,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
 
     public function posts()
     {

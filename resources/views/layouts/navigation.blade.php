@@ -28,7 +28,7 @@
                 </x-nav-link>
             </div>
 
-            @if (Auth::check() && Auth::user()->role->label=='admin')
+            @if (Auth::check() && Auth::user()->is_author)
                 <div class="space-x-8 -my-px me-8 flex">
                     <x-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1">

@@ -26,31 +26,28 @@ class DatabaseSeeder extends Seeder
         Position::create(['label' => 'PF']);
         Position::create(['label' => 'C']);
 
-        $admin = Role::create(['label' => 'admin']);
-        $writer = Role::create(['label' => 'writer']);
-        $reader = Role::create(['label' => 'reader']);
-
         $adminUser = User::factory()->create([
             'name' => 'Admin',
             'firstname' => 'User',
             'email' => 'admin@example.com',
-            'role_id' => $admin->id,
+            'is_admin' => true,
+            'is_author' => true,
             'password' => bcrypt('admin')
         ]);
 
         $writerUser = User::factory()->create([
-            'name' => 'Writer',
+            'name' => 'Author',
             'firstname' => 'User',
-            'email' => 'writer@example.com',
-            'role_id' => $writer->id,
-            'password' => bcrypt('writer')
+            'email' => 'author@example.com',
+            'is_admin' => false,
+            'is_author' => true,
+            'password' => bcrypt('author')
         ]);
 
         User::factory()->create([
             'name' => 'Reader',
             'firstname' => 'User',
             'email' => 'reader@example.com',
-            'role_id' => $reader->id,
             'password' => bcrypt('reader')
         ]);
 
