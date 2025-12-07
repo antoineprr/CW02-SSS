@@ -5,6 +5,8 @@
         </h2>
     </x-slot>
 
+    <div class="px-12 pt-3">
+    </div>
     @if($posts->count() > 0)
         <div class="px-12 py-3">
             <div class="text-gray-900">
