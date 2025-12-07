@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --color-brand-primary: #E0B7C3;
+        --color-brand-accent: #f6d3db;
+    }
+}

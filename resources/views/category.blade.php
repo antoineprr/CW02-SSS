@@ -7,15 +7,23 @@
                 Posts for team: {{ $categoryLabel }}
             @elseif($type === 'player')
                 Posts about {{ $categoryLabel->firstname }} {{ $categoryLabel->name }}
+            @elseif($type === 'author')
+                Posts by {{ $categoryLabel->firstname }} {{ $categoryLabel->name }}
             @endif
         </h2>
     </x-slot>
 
-    <div class="px-6 pt-3">
+    <div class="px-12 pt-3">
         @if($type === 'category')
             <div class="bg-white shadow p-3">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Posts in category: {{ $categoryLabel }}
+                </h2>
+            </div>
+        @elseif($type === 'author')
+            <div class="bg-white shadow p-3">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Posts by {{ $categoryLabel->firstname }} {{ $categoryLabel->name }}
                 </h2>
             </div>
         @elseif($type === 'team')

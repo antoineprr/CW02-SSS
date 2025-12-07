@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('reader')
         ]);
 
-        Category::factory(5)->create();
+        $categories = Category::factory(10)->create();
 
         $teams = Team::factory(10)->create();
         foreach ($teams as $team) {
@@ -61,13 +61,22 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Post::factory(5)->create([
+        $adminPost = Post::factory(5)->create([
             'user_id' => $adminUser->id
         ]);
 
-        Post::factory(5)->create([
+        $writerPost = Post::factory(5)->create([
             'user_id' => $writerUser->id
         ]);
+
+        $players = Player::all();
+        $posts = $adminPost->concat($writerPost);
+
+        foreach ($posts as $index => $post) {
+            $post->categories()->attach($categories[$index]->id);
+            $post->teams()->attach($teams[$index]->id);
+            $post->players()->attach($players[$index]->id);
+        }
 
     }
 }

@@ -1,6 +1,6 @@
 @props(['posts'])
 
-<div class="py-6 px-12 mx-auto grid grid-cols-3 gap-4 items-stretch">
+<div class="py-2 px-12 mx-auto grid grid-cols-3 gap-2 items-stretch">
     @if(isset($posts[0]))
         <div class="col-span-2">
             <x-featured-post :post="$posts[0]" />

@@ -10,7 +10,7 @@
                 <div class="flex items-center mr-2">
                     <x-dropdown>
                         <x-slot name="trigger">
-                            <button class="transition ease-in-out duration-150 h-11 w-11 rounded-full border-2 bg-[#E0B7C3] flex items-center justify-center overflow-hidden">
+                            <button class="transition ease-in-out duration-150 h-11 w-11 rounded-full border-2 bg-brand-primary flex items-center justify-center overflow-hidden">
                                 @if (Auth::user()->picture && Storage::disk('public')->exists(Auth::user()->picture))
                                     <img 
                                         src="{{ asset('storage/' . Auth::user()->picture) }}" 
@@ -46,12 +46,12 @@
             @else
 
                 <a href="{{ route('login') }}"
-                    class="font-semibold text-[#E0B7C3] hover:text-[#F2CEDA] transition">
+                    class="font-semibold text-brand-primary hover:text-brand-accent transition">
                     Log in
                 </a>
 
                 <a href="{{ route('register') }}"
-                    class="ml-4 font-semibold text-[#E0B7C3] hover:text-[#F2CEDA] transition">
+                    class="ml-4 font-semibold text-brand-primary hover:text-brand-accent transition">
                     Register
                 </a>
 

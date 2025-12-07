@@ -49,20 +49,22 @@ Route::post('/create-post', [PostController::class, 'store'])->name('post.store'
 
 Route::get('/posts/{post:slug}', function (Post $post) {
     return view('post', [
-        'post' => $post
+        'post' => $post->load(['categories', 'author', 'players', 'teams'])
     ]);
 })->name('post.show');
 
-// Route::get('/authors/{firstname}-{name}', function ($firstname, $name) {
-//     $author = User::where('firstname', $firstname)
-//                                 ->where('name', $name)
-//                                 ->firstOrFail();
-//     return view('category', [
-//         'type' => 'author',
-//         'categoryLabel' => $author,
-//         'posts' => $author->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
-//     ]);
-// })->name('player.show');
+Route::get('/authors/{firstname}-{lastname}', function ($firstname, $lastname) {
+    $author = User::where('firstname', $firstname)
+                                ->where('name', $lastname)
+                                ->where('is_author', true)
+                                ->firstOrFail();
+    return view('category', [
+        'type' => 'author',
+        'categoryLabel' => $author,
+        'posts' => $author->posts()->with(['categories', 'author', 'players', 'teams'])->latest()->get()
+    ]);
+})->name('author.show');
+
 
 Route::get('/category/{category:label}', function ($category) {
     return view('category', [
