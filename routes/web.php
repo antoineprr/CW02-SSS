@@ -111,6 +111,16 @@ Route::get('/articles/players/{firstname}-{name}', function ($firstname, $name) 
     ]);
 })->name('articles.player');
 
+Route::middleware('author')->group(function () {
+    Route::get('/create-post', function () {
+        return view('create-post', [
+            'categories' => Category::all(),
+            'players' => Player::all(),
+            'teams' => Team::all(),
+        ]);
+    })->name('post.create');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

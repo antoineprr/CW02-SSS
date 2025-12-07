@@ -1,6 +1,6 @@
 @props(['post'])
 
-<div class="block bg-white overflow-hidden h-full py-4 hover:shadow-lg transition-shadow duration-200">
+<div class="block bg-white overflow-hidden h-full py-4">
     <a href="{{ route('post.show', $post->slug) }}">
         @if($post->thumbnail)
             <div class="px-6">

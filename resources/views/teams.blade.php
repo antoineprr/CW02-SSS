@@ -6,10 +6,16 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <!-- Teams Page Content -->
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-white overflow-hidden shadow-sm ">
+                <div class="p-3 text-gray-900">
+                    <div class="space-y-2">
+                        @forelse($teams as $team)
+                            <x-team-header :team="$team" />
+                        @empty
+                            <p class="text-gray-500 text-center">No teams found.</p>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>

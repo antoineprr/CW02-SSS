@@ -19,8 +19,8 @@
             <h1 class="text-3xl font-bold mb-2">
                 <a href="{{ route('team.show', $team) }}" class="hover:underline">{{ $team->name }}</a>
             </h1>
-            <p class="text-lg opacity-90 mb-1">{{ $team->location }}</p>
-            <p class="opacity-80">{{ $team->description }}</p>
+            <p class="text-lg mb-1">Location: {{ $team->location }}</p>
+            <p class="text-base">{{ $team->description }}</p>
         </div>
     </div>
 </div>
