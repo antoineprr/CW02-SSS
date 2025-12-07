@@ -3,10 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function getHomePage() 
+    {
+        return view('home', [
+            'posts' => Post::with(['categories', 'author', 'players', 'teams'])->latest()->limit(5)->get()
+        ]);
+    }
+
+    public function showCreatePost()
+    {
+        return view('create-post', [
+            'categories' => Category::all(),
+            'players' => Player::all(),
+            'teams' => Team::all(),
+        ]);
+    }
+
+    public function getPostBySlug(Post $post) {
+        return view('post', [
+            'post' => $post->load(['categories', 'author', 'players', 'teams'])
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */

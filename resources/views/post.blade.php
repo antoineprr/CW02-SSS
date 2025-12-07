@@ -8,6 +8,7 @@
     <div class="py-2 px-12 mx-auto gap-4 items-stretch">
         <div class="bg-white overflow-hidden h-full py-4">
             <div class="px-8 my-4">
+                <x-post-badges :post="$post" size="large" />
                 <h1 class="text-2xl font-bold text-gray-900 mb-2 ">{{ $post->title }}</h1>
                 <p class="text-gray-700 text-lg">{!! $post->getArticleInfos() !!}</p>
             </div>

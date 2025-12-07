@@ -27,5 +27,8 @@
         @if($player->age)
             - {{ $player->age }} years old
         @endif
+        @if($player->country)
+            - {{ $player->country->name }}
+        @endif
     </div>
 </div>
