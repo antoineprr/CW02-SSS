@@ -52,7 +52,7 @@ class Post extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class, 'team_post');
     }
 
     public function categories()
