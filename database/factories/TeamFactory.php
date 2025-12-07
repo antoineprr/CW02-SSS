@@ -20,6 +20,7 @@ class TeamFactory extends Factory
             'name' => fake()->company(),
             'location' => fake()->city(),
             'description' => fake()->sentence(10),
+            'color' => fake()->hexColor(),
         ];
     }
 }

@@ -8,7 +8,7 @@
             </x-badge>
         @endforeach
         @foreach($post->teams as $team)
-            <x-badge :href="route('team.show', $team->name)" type="team" :size="$size">
+            <x-badge :href="route('team.show', $team->name)" type="team" :size="$size" :color="$team->color">
                 {{ $team->name }}
             </x-badge>
         @endforeach

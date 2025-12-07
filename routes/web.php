@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Player;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +43,11 @@ Route::get('/search', function () {
 })->name('search');
 
 Route::get('/create-post', function () {
-    return view('create-post');
+    return view('create-post', [
+        'categories' => Category::all(),
+        'players' => Player::all(),
+        'teams' => Team::all(),
+    ]);
 })->name('post.create');
 
 Route::post('/create-post', [PostController::class, 'store'])->name('post.store')->middleware('auth');

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('location');
             $table->string('description');
-            // TODO : add the logo
+            $table->string('color')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
