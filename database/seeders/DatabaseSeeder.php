@@ -52,10 +52,10 @@ class DatabaseSeeder extends Seeder
         $adminUser = User::create([
             'name' => 'Morgan',
             'firstname' => 'Alex',
-            'email' => 'admin.user@test.local',
+            'email' => 'admin.user@test.demo',
             'is_admin' => true,
             'is_author' => true,
-            'password' => bcrypt('AdminPass123!')
+            'password' => bcrypt('#DEMOPass123!')
         ]);
 
         $writerUser = User::factory()->create([
