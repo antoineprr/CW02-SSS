@@ -5,6 +5,14 @@
         </h2>
     </x-slot>
 
+    <div class="px-6 pt-3">
+        <div class="bg-white shadow p-3">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ $categoryLabel }} {{-- TODO : affichage en fonction du type affiché --}}
+            </h2>
+        </div>
+    </div>
+
     @if($posts->count() > 0)
         <x-posts-grid :posts="$posts" />
     @else

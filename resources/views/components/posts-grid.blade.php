@@ -11,7 +11,7 @@
         <div>
             <div class="grid grid-cols-1 gap-2 h-full">
                 @foreach($posts->slice(1, 4) as $post)
-                    <x-article-overview :post="$post" :excerptLength="80" />
+                    <x-article-overview :post="$post"/>
                 @endforeach
             </div>
         </div>

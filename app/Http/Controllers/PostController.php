@@ -26,8 +26,8 @@ class PostController extends Controller
 
         $validated['user_id'] = auth()->id();
 
-        Post::create($validated);
+        $post = Post::create($validated);
 
-        return redirect()->route('home')->with('success', 'Post created successfully!'); // TODO : when article view available, redirect there
+        return redirect()->route('post.show', $post->slug)->with('success', 'Post created successfully!');
     }
 }
